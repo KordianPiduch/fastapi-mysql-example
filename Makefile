@@ -4,7 +4,7 @@ build:
 
 .PHONY: run
 run:
-	docker run -p 8000:8000 testapp -d
+	docker run -p 8000:8000 -d testapp 
 
 .PHONY: venv
 venv:
