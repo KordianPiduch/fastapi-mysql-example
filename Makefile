@@ -1,10 +1,10 @@
 .PHONY: build
 build:
-	docker build -t testapp .
+	docker build -t fastapi_mysql_example .
 
 .PHONY: run
 run:
-	docker run -p 8000:8000 -d testapp 
+	docker run --rm -p 8000:8000 -d fastapi_mysql_example 
 
 .PHONY: venv
 venv:
@@ -15,7 +15,7 @@ bootstrap: venv ## bootstrap the development environment inside a virtualenv
 	( \
 		. venv/bin/activate; \
 		pip install -r requirements.txt; \
-		pip install --editable .; \
+		pip install -e .; \
 	)
 	@echo ""
 	@echo "    source venv/bin/activate"
