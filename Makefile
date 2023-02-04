@@ -1,10 +1,16 @@
+APP_NAME = fastapi_mysql_example
+
 .PHONY: build
 build:
-	docker build -t fastapi_mysql_example .
+	docker build -t $(APP_NAME) .
 
 .PHONY: run
 run:
-	docker run --rm -p 8000:8000 -d fastapi_mysql_example 
+	docker run --name my_app --rm -p 8000:8000 -d $(APP_NAME) 
+
+.PHONY: stop
+stop:
+	docker stop my_app
 
 .PHONY: venv
 venv:
@@ -22,7 +28,7 @@ bootstrap: venv ## bootstrap the development environment inside a virtualenv
 	@echo ""
 
 .PHONY: clean
-clean: clean-build clean-pyc clean-venv 
+clean: clean-build clean-pyc clean-venv clean-docker
 
 .PHONY: clean-build
 clean-build: ## Remove build artifacts.
@@ -46,3 +52,7 @@ clean-pyc: ## Remove Python file artifacts.
 .PHONY: clean-venv
 clean-venv: ## Remove virtualenv.
 	rm -fr venv/
+
+.PHONY: clean-docker
+clean-docker:
+	docker rmi $(APP_NAME) -f
