@@ -5,16 +5,16 @@ from app.routes.route1 import router1
 
 
 app = FastAPI()
-app.include_router(prefix='/route1', router=router1)
+app.include_router(prefix='/test-route', router=router1)
 
 
-@app.get('/')
+@app.get('/', status_code=200)
 def root():
     """
     docstring for root
     """
     return {
-        'status': "I'm Alive!", "code": 200
+        'status': "I'm Alive!"
     }
 
 
